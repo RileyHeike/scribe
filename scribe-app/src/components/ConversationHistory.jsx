@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 const ConversationHistory = ({ conversations, onLoadConversation }) => {
+
   return (
     <div className="sidebar-content">
       <h2 className="sidebar-title">Conversations</h2>
