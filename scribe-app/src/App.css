@@ -1,42 +1,164 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* App container - side-by-side layout */
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  background-color: #202123;
+  color: white;
+  overflow: hidden;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Sidebar (History Panel) */
+.history-panel {
+  width: 250px;
+  background-color: #2d2e32;
+  padding: 20px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Chat container now takes up the rest of the screen */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  overflow: hidden;
+}
+
+/* Chat window takes up available space */
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Make sure chat bubbles don't overflow */
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+}
+
+.chat-bubble.user {
+  background-color: #007aff;
+  align-self: flex-end;
+}
+
+.chat-bubble.bot {
+  background-color: #444;
+  align-self: flex-start;
+}
+
+/* Chat input bar at the bottom */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: #2d2e32;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Save button */
+.save-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.save-button:hover {
+  background-color: #218838;
+}
+
+.hamburger-menu {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-overlay.show {
+  display: flex;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  background-color: #2d2e32;
+  width: 80%;
+  max-width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Close Button */
+.close-sidebar {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  float: right;
+}
+
+
+
+/* Responsive Design */
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .history-panel {
+    display: none; /* Hides sidebar */
   }
-  to {
-    transform: rotate(360deg);
+
+  .hamburger-menu {
+    display: block; /* Show hamburger menu */
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
