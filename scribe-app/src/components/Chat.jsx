@@ -15,7 +15,9 @@ const Chat = ({ messages, welcomeVisible }) => {
       {welcomeVisible && fade && (
         <div className="welcome-text">
           <h1>Welcome to SCRIBE</h1>
-          <p>RAG-based digital archive query model. Type a message to start the conversation.</p>
+          <div className="welcome-message">
+            <p>A RAG-based AI chatbot built to unearth buried stories and bring SCU digital archives to life.</p>
+          </div>
         </div>
       )}
 
