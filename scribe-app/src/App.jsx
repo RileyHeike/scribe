@@ -7,7 +7,7 @@ const App = () => {
   const [conversations, setConversations] = useState([]);
   const [currentConversation, setCurrentConversation] = useState([]);
   const [welcomeVisible, setWelcomeVisible] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Tracks sidebar visibility
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar always starts closed
 
   const handleSendMessage = (text) => {
     if (!text.trim()) return;
@@ -35,29 +35,18 @@ const App = () => {
 
   return (
     <div className="app-container">
-      {/* Sidebar (Always Visible on Large Screens) */}
-      <div className="history-panel">
+      {/* Hamburger Menu */}
+      {!sidebarOpen && (
+         <button className="hamburger-menu" onClick={() => setSidebarOpen(true)}>☰</button>
+      )}
+      {/* Sidebar Overlay - Permanently Toggled by the Button */}
+      <div className={`sidebar-overlay ${sidebarOpen ? "show" : ""}`}>
+        <button className="close-sidebar" onClick={() => setSidebarOpen(false)}>×</button>
         <ConversationHistory
           conversations={conversations}
           onLoadConversation={handleLoadConversation}
         />
       </div>
-
-      {/* Hamburger Menu for Small Screens */}
-      <button className="hamburger-menu" onClick={() => setSidebarOpen(true)}>☰</button>
-
-      {/* Sidebar Overlay (for Small Screens) */}
-      {sidebarOpen && (
-        <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}>
-          <div className="sidebar-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-sidebar" onClick={() => setSidebarOpen(false)}>×</button>
-            <ConversationHistory
-              conversations={conversations}
-              onLoadConversation={handleLoadConversation}
-            />
-          </div>
-        </div>
-      )}
 
       {/* Chat Section */}
       <div className="chat-container">

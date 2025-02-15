@@ -1,3 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: #202123;
+  overflow: hidden;
+  border: none;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -7,22 +21,11 @@
 /* App container - side-by-side layout */
 .app-container {
   display: flex;
-  flex-direction: row;
   height: 100vh;
   width: 100vw;
   background-color: #202123;
   color: white;
   overflow: hidden;
-}
-
-/* Sidebar (History Panel) */
-.history-panel {
-  width: 250px;
-  background-color: #2d2e32;
-  padding: 20px;
-  overflow-y: auto;
-  flex-shrink: 0;
-  display: block;
 }
 
 /* Chat container now takes up the rest of the screen */
@@ -44,6 +47,7 @@
   overflow-y: auto;
   width: 100%;
   padding: 20px;
+  border: none;
 }
 
 /* Make sure chat bubbles don't overflow */
@@ -103,8 +107,7 @@
 }
 
 .hamburger-menu {
-  display: none;
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 20px;
   font-size: 24px;
@@ -112,22 +115,29 @@
   color: white;
   border: none;
   cursor: pointer;
+  z-index: 10;
+}
+
+.sidebar-overlay.show + .hamburger-menu {
+  display: none;
 }
 
 .sidebar-overlay {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 250px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0);
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
   justify-content: center;
   align-items: center;
 }
 
 .sidebar-overlay.show {
-  display: flex;
+  transform: translateX(0);
 }
 
 /* Sidebar Content */
@@ -146,7 +156,9 @@
   color: white;
   font-size: 24px;
   cursor: pointer;
-  float: right;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 
