@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
 
-const Chat = ({ messages, welcomeVisible }) => {
+const Chat = ({ messages, welcomeVisible, urlGroups }) => {
   const [fade, setFade] = useState(true);
   const chatEndRef = useRef(null);
 
@@ -31,6 +31,15 @@ const Chat = ({ messages, welcomeVisible }) => {
           className={`chat-bubble ${msg.role === "assistant" ? "ai-message" : "user-message"}`} // Apply different styles
         >
           {msg.text}
+          <div>
+            {urlGroups[(index - 1) / 2] ? urlGroups[(index - 1) / 2][0] : <></>}
+          </div>
+          <div>
+            {urlGroups[(index - 1) / 2] ? urlGroups[(index - 1) / 2][1] : <></>}
+          </div>
+          <div>
+            {urlGroups[(index - 1) / 2] ? urlGroups[(index - 1) / 2][2] : <></>}
+          </div>
         </div>
       ))}
       <div ref={chatEndRef} />
