@@ -16,6 +16,7 @@ const App = () => {
     conversations, setConversations
   } = useChat();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [urlGroups, setUrlGroups] = useState([]);
   const navigate = useNavigate();
@@ -90,8 +91,8 @@ const App = () => {
       <div className="chat-container">
         <Routes>
           <Route path="/" element={<>
-            <Chat messages={currentConversation} welcomeVisible={welcomeVisible} urlGroups={urlGroups} />
-            <ChatInput onSendMessage={handleSendMessage} conversationContext={conversationContext} setConversationContext={setConversationContext}/>
+            <Chat messages={currentConversation} welcomeVisible={welcomeVisible} urlGroups={urlGroups} isLoading={isLoading} />
+            <ChatInput onSendMessage={handleSendMessage} conversationContext={conversationContext} setConversationContext={setConversationContext} setIsLoading={setIsLoading}/>
           </>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/faq" element={<FAQPage />} />
