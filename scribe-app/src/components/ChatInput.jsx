@@ -3,27 +3,32 @@ import { useState } from "react";
 import { FaSearch } from 'react-icons/fa';
 
 
-const ChatInput = ({ onSendMessage, conversationContext, setConversationContext }) => {
+const ChatInput = ({ onSendMessage, conversationContext, setConversationContext, setIsLoading }) => {
   const [message, setMessage] = useState("");
 
   const handleSend = async () => {
-    if (!message.trim()) {
+    const messageText = message
+    setMessage("");
+
+    if (!messageText.trim()) {
       console.log("No message entered");
       return;
     }
   
-    const userMessage = { role: "user", text: message };
+    const userMessage = { role: "user", text: messageText };
     onSendMessage(userMessage); // Send the user message
   
     try {
-      const payload = JSON.stringify({ prompt: message, context: conversationContext });
+      const payload = JSON.stringify({ prompt: messageText, context: conversationContext });
       console.log("Payload:", payload);
   
+      setIsLoading(true);
       const response = await fetch("http://localhost:5005/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: payload,
       });
+      setIsLoading(false);
   
       const data = await response.json();
       console.log("Response:", data);

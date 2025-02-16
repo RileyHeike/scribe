@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
+import BouncingDotsLoader from "./BouncingDots";
 
-const Chat = ({ messages, welcomeVisible, urlGroups }) => {
+const Chat = ({ messages, welcomeVisible, urlGroups, isLoading }) => {
   const [fade, setFade] = useState(true);
   const chatEndRef = useRef(null);
 
@@ -42,7 +43,12 @@ const Chat = ({ messages, welcomeVisible, urlGroups }) => {
           </div>
         </div>
       ))}
-      <div ref={chatEndRef} />
+        {isLoading && <div
+          className={`chat-bubble ai-message`}
+        >
+          <BouncingDotsLoader></BouncingDotsLoader>
+        </div>}
+        <div ref={chatEndRef} />
       </div>
     </div>
   );

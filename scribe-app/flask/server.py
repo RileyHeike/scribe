@@ -53,12 +53,6 @@ def query_data(query):
     as_output4 = docs[3].page_content
     as_output5 = docs[4].page_content
 
-    print("="*20)
-    print("DATE : " + str(docs[0].metadata['date']))
-    print("DATE : " + str(docs[0].metadata['id']))
-    print("DATE : " + str(docs[0].metadata['collection']))
-    print("="*20)
-
     messages = [
         SystemMessage(content="You are a Santa Clara University Digital Archives Bot. You will answer questions based on the documents provided that are about the history of Santa Clara told through school newspaper articles. Be sure to include one quote from the document that best applies to the user's question."),
         SystemMessage(content="You will be provided with 5 documents, you do not need to include information from all of them. Use primarily the first document and then revise it with the documents after"),
