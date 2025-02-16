@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Chat from "./components/Chat";
@@ -51,18 +51,6 @@ const App = () => {
     setWelcomeVisible(false); // Hide the welcome screen after the first message
   };
   
-  
-  
-  
-  
-  /*const handleSaveConversation = () => {
-    if (currentConversation.length === 0) return;
-    const newTitle = `Conversation ${conversations.length + 1}`;
-    setConversations([{ title: newTitle, messages: currentConversation }, ...conversations]);
-    setCurrentConversation([]);
-    setWelcomeVisible(true);
-  };*/
-  
   const handleLoadConversation = (messages, index) => {
     setCurrentConversation(messages); // Set the selected conversation messages
     setActiveConversationIndex(index); // Set the active conversation index
@@ -71,7 +59,6 @@ const App = () => {
     navigate("/"); // Redirect back to the chat page
   };
   
-
   const handleNewConversation = () => {
     setActiveConversationIndex(null); // Reset active conversation
     setCurrentConversation([]);

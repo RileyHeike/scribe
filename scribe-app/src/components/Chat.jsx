@@ -1,13 +1,16 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Chat = ({ messages, welcomeVisible }) => {
   const [fade, setFade] = useState(true);
+  const chatEndRef = useRef(null);
 
   useEffect(() => {
     if (messages.length > 0) {
       setFade(false);
     }
+
+    chatEndRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -21,7 +24,8 @@ const Chat = ({ messages, welcomeVisible }) => {
         </div>
       )}
 
-{messages.map((msg, index) => (
+
+      <div className="chat-messages">{messages.map((msg, index) => (
         <div
           key={index}
           className={`chat-bubble ${msg.role === "assistant" ? "ai-message" : "user-message"}`} // Apply different styles
@@ -29,7 +33,8 @@ const Chat = ({ messages, welcomeVisible }) => {
           {msg.text}
         </div>
       ))}
-
+      <div ref={chatEndRef} />
+      </div>
     </div>
   );
 };
