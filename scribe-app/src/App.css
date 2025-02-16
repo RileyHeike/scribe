@@ -46,6 +46,7 @@ html, body {
   margin-bottom: 10px;
   text-align: center;
   font: 34px 'Courier New', monospace;
+  color: #A57F6C;
   /*text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);*/
 }
 
@@ -93,14 +94,14 @@ html, body {
 /* Chat input bar */
 .chat-input {
   display: flex;
-  padding: 10px;
-  background-color: #E3B171;
+  padding: 5px;
+  background-color: #D4BBA3;
   width: 100%;
   max-width: 600px;
   border-radius: 25px;
   margin: auto;
   position: relative; /* Enables absolute positioning for child elements */
-  
+  z-index: 0;
   
 }
 
@@ -119,7 +120,7 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   background-color: white;
-  color: #E3B171;
+  color: #D4BBA3;
   border: none;
   cursor: pointer;
   border-radius: 25px;
@@ -151,7 +152,7 @@ html, body {
   left: 20px;
   font-size: 24px;
   background: none;
-  color: white;
+  color: #A57F6C;
   border: none;
   cursor: pointer;
   z-index: 10;
@@ -161,13 +162,15 @@ html, body {
   display: none;
 }
 
+
+
 .sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #d0ab79;
+  background-color: #B38B79;
   box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.3);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
@@ -175,6 +178,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 5;
 }
 
 .sidebar-overlay.show {
@@ -186,7 +190,7 @@ html, body {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: white;
+  color: #F6F0E8;
   text-transform: uppercase;
 }
 
@@ -235,7 +239,7 @@ html, body {
   padding: 12px 15px;
   margin: 5px 0;
   background-color: transparent;
-  color: white;
+  color: #F6F0E8;
   border: none;
   text-align: left;
   cursor: pointer;
@@ -248,7 +252,7 @@ html, body {
 
 .sidebar-buttons a {
   text-decoration: none;
-  color: white;
+  color: #F6F0E8;
   display: block;
   width: 100%;
 }
@@ -259,8 +263,8 @@ html, body {
   padding: 12px 15px;
   margin-top: 30px; /* Added spacing from the top */
   margin-bottom: 25px; /* Added spacing below */
-  background-color: #2c2e30;
-  color: white;
+  background-color: #A57F6C;
+  color: #F6F0E8;
   border: none;
   text-align: center;
   cursor: pointer;
