@@ -35,7 +35,7 @@ const ChatInput = ({ onSendMessage, conversationContext, setConversationContext 
           if (data.docs[i]) {
             let doc = data.docs[i]
             let url = `https://content.scu.edu/digital/collection/${doc.collection}/id/${doc.id}/rec/1`
-            urls.push(<a href={url} target="_blank" key={i} rel="noopener noreferrer">{url}</a>);
+            urls.push(<a href={url} className="link" target="_blank" key={i} rel="noopener noreferrer">{url}</a>);
           }
         }
         const aiResponse = {

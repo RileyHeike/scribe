@@ -31,13 +31,13 @@ const Chat = ({ messages, welcomeVisible, urlGroups }) => {
           className={`chat-bubble ${msg.role === "assistant" ? "ai-message" : "user-message"}`} // Apply different styles
         >
           {msg.text}
-          <div>
+          <div className='url'>
             {urlGroups[(index - 1) / 2] ? urlGroups[(index - 1) / 2][0] : <></>}
           </div>
-          <div>
+          <div className='url'>
             {urlGroups[(index - 1) / 2] ? urlGroups[(index - 1) / 2][1] : <></>}
           </div>
-          <div>
+          <div className='url'>
             {urlGroups[(index - 1) / 2] ? urlGroups[(index - 1) / 2][2] : <></>}
           </div>
         </div>
