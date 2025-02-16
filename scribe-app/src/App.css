@@ -181,25 +181,6 @@ html, body {
   padding: 10px;
 }
 
-<<<<<<< HEAD
-=======
-
-
-
-/* Save button */
-.save-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-
-
->>>>>>> 82d0c7e (Updated Color palate)
 .hamburger-menu {
   position: fixed;
   top: 20px;
