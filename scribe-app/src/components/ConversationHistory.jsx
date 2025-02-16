@@ -13,7 +13,7 @@ const ConversationHistory = ({ conversations, onLoadConversation }) => {
             <li 
               key={index} 
               className="conversation-item"
-              onClick={() => onLoadConversation(conv.messages)}
+              onClick={() => onLoadConversation(conv.messages, index)}
             >
               {conv.title}
             </li>

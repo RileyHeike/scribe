@@ -16,6 +16,9 @@ html, body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --primary-bg-color: #F6F0E8;
+  --primary-color: #8B4513;
+  --secondary-color: #A57F6C;
 }
 
 /* App container - side-by-side layout */
@@ -23,7 +26,7 @@ html, body {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background-color: #F6F0E8;
+  background-color: var(--primary-bg-color);
   color: white;
   overflow: hidden;
 }
@@ -46,7 +49,7 @@ html, body {
   margin-bottom: 10px;
   text-align: center;
   font: 34px 'Courier New', monospace;
-  color: #A57F6C;
+  color: var(--secondary-color);
   /*text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);*/
 }
 
@@ -152,7 +155,7 @@ html, body {
   left: 20px;
   font-size: 24px;
   background: none;
-  color: #A57F6C;
+  color: var(--secondary-color);
   border: none;
   cursor: pointer;
   z-index: 10;
@@ -190,7 +193,7 @@ html, body {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #F6F0E8;
+  color: var(--primary-bg-color);
   text-transform: uppercase;
 }
 
@@ -239,7 +242,7 @@ html, body {
   padding: 12px 15px;
   margin: 5px 0;
   background-color: transparent;
-  color: #F6F0E8;
+  color: var(--primary-bg-color);
   border: none;
   text-align: left;
   cursor: pointer;
@@ -252,7 +255,7 @@ html, body {
 
 .sidebar-buttons a {
   text-decoration: none;
-  color: #F6F0E8;
+  color: var(--primary-bg-color);
   display: block;
   width: 100%;
 }
@@ -263,8 +266,8 @@ html, body {
   padding: 12px 15px;
   margin-top: 30px; /* Added spacing from the top */
   margin-bottom: 25px; /* Added spacing below */
-  background-color: #A57F6C;
-  color: #F6F0E8;
+  background-color: var(--secondary-color);
+  color: var(--primary-bg-color);
   border: none;
   text-align: center;
   cursor: pointer;

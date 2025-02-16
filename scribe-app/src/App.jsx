@@ -18,48 +18,57 @@ const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
+  const [activeConversationIndex, setActiveConversationIndex] = useState(null); // Tracks which conversation is selected
+
   const handleSendMessage = (text) => {
     if (!text.trim()) return;
-    
+  
     const newMessage = { role: "user", text };
-    const updatedConversation = [...currentConversation, newMessage];
   
-    setCurrentConversation(updatedConversation);
+    if (activeConversationIndex !== null) {
+      // Append to the selected conversation
+      setConversations((prevConversations) => {
+        return prevConversations.map((conv, index) =>
+          index === activeConversationIndex
+            ? { ...conv, messages: [...conv.messages, newMessage] }
+            : conv
+        );
+      });
+    } else {
+      // Start a new conversation if none is selected
+      const newTitle = `Conversation ${conversations.length + 1}`;
+      const newConversation = { title: newTitle, messages: [newMessage] };
+      
+      setConversations([newConversation, ...conversations]); // Save new conversation
+      setActiveConversationIndex(0); // Set this as the active conversation
+    }
+  
+    setCurrentConversation([...currentConversation, newMessage]);
     setWelcomeVisible(false);
-  
-    // Update the existing conversation
-    handleUpdateConversation(updatedConversation);
   };
   
-  const handleUpdateConversation = (updatedConversation) => {
-    setConversations((prevConversations) => {
-      if (prevConversations.length === 0) {
-        // If there are no conversations, create a new one
-        return [{ title: `Conversation 1`, messages: updatedConversation }];
-      }
+  /*const handleSaveConversation = () => {
+    if (currentConversation.length === 0) return;
+    const newTitle = `Conversation ${conversations.length + 1}`;
+    setConversations([{ title: newTitle, messages: currentConversation }, ...conversations]);
+    setCurrentConversation([]);
+    setWelcomeVisible(true);
+  };*/
   
-      // Update the latest conversation instead of adding a new one
-      return prevConversations.map((conv, index) =>
-        index === 0 ? { ...conv, messages: updatedConversation } : conv
-      );
-    });
-  };
-  
-  const handleLoadConversation = (messages) => {
+  const handleLoadConversation = (messages, index) => {
     setCurrentConversation(messages);
+    setActiveConversationIndex(index);
     setWelcomeVisible(false);
     setSidebarOpen(false);
     navigate("/"); // Ensure user is redirected back to chat page
   };
 
   const handleNewConversation = () => {
-    if (currentConversation.length > 0) {
-      handleUpdateConversation(currentConversation);
-    }
+    setActiveConversationIndex(null); // Reset active conversation
     setCurrentConversation([]);
     setWelcomeVisible(true);
     setSidebarOpen(false);
-    navigate("/"); // Ensure user is redirected back to chat page
+    navigate("/");
   };
 
   return (
