@@ -7,7 +7,7 @@
 html, body {
   height: 100%;
   width: 100%;
-  background-color: #202123;
+  background-color: #FBF7F8;
   overflow: hidden;
   border: none;
 }
@@ -16,9 +16,9 @@ html, body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  --primary-bg-color: #F6F0E8;
-  --primary-color: #8B4513;
-  --secondary-color: #A57F6C;
+  --primary-bg-color: #FBF7F8;
+  --primary-color: #7C1529;
+  --secondary-color: #981E32;
 }
 
 /* App container - side-by-side layout */
@@ -59,6 +59,7 @@ html, body {
   margin-bottom: 20px;
   text-align: center;
   color: var(--primary-color);
+  color: var(--primary-color);
   text-shadow: none;
 
 }
@@ -81,7 +82,19 @@ html, body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px 40px;
+  width: 75%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 40px;
   border: none;
+  margin-top: 20px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 20px;
   margin-top: 20px;
 }
 
@@ -97,19 +110,21 @@ html, body {
   max-width: 80%;
   padding: 15px;
   margin: 10px 0;
+  padding: 15px;
+  margin: 10px 0;
   border-radius: 10px;
 }
 
 .user-message {
-  background-color: #C17767;  /* Blue for user messages */
+  background-color: #981E32;  /* Blue for user messages */
   color: white;
   align-self: flex-end;
   text-align: right;
 }
 
 .ai-message {
-  background-color: #D4BBA3;  
-  color: black;
+  background-color: #F0E6E8;  
+  color: #2C1518;
   align-self: flex-start;
   text-align: left;
 }
@@ -121,7 +136,7 @@ html, body {
 }
 
 .link {
-  color: red;
+  color: #981E32;
 }
 
 .chat-messages {
@@ -132,8 +147,8 @@ html, body {
 /* Chat input bar */
 .chat-input {
   display: flex;
-  padding: 5px;
-  background-color: #D4BBA3;
+  padding: 2.5px;
+  background-color: #981E32;
   width: 100%;
   max-width: 600px;
   border-radius: 25px;
@@ -158,7 +173,7 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   background-color: white;
-  color: #D4BBA3;
+  color: #981E32;
   border: none;
   cursor: pointer;
   border-radius: 25px;
@@ -166,6 +181,25 @@ html, body {
   padding: 10px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+/* Save button */
+.save-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+
+>>>>>>> 82d0c7e (Updated Color palate)
 .hamburger-menu {
   position: fixed;
   top: 20px;
@@ -188,7 +222,7 @@ html, body {
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #B38B79;
+  background-color: #7C1529;
   box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.3);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
@@ -208,7 +242,7 @@ html, body {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: var(--primary-bg-color);
+  color: #FFFFFF;
   text-transform: uppercase;
 }
 
@@ -235,7 +269,7 @@ html, body {
 
 /* Hover Effect */
 .conversation-item:hover {
-  background-color: #3a3b3f;
+  background-color: #3D1F23;
 }
 
 /* Active Conversation (Optional) */
@@ -257,7 +291,7 @@ html, body {
   padding: 12px 15px;
   margin: 5px 0;
   background-color: transparent;
-  color: var(--primary-bg-color);
+  color: #981E32;
   border: none;
   text-align: left;
   cursor: pointer;
@@ -265,7 +299,7 @@ html, body {
 }
 
 .sidebar-buttons button:hover {
-  background-color: #3a3b3f;
+  background-color: #3D1F23;
 }
 
 .sidebar-buttons a {
@@ -293,7 +327,7 @@ html, body {
 }
 
 .new-conversation-btn:hover {
-  background-color: #3e4144;
+  background-color: #3D1F23;
 }
 
 /* Info Pages */

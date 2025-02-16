@@ -79,7 +79,7 @@ const App = () => {
 
       <div className={`sidebar-overlay ${sidebarOpen ? "show" : ""}`}>
         <button className="close-sidebar" onClick={() => setSidebarOpen(false)}>×</button>
-        <button className="new-conversation-btn" onClick={handleNewConversation}>➕ New Conversation</button>
+        <button className="new-conversation-btn" onClick={handleNewConversation}>New Conversation</button>
         <ConversationHistory conversations={conversations} onLoadConversation={handleLoadConversation} /> 
 
         <div className="sidebar-buttons">
