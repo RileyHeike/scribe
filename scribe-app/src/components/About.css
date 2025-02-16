@@ -1,0 +1,100 @@
+.about-container {
+    text-align: center;
+    padding: 60px;
+    max-width: 1000px;
+    margin: auto;
+    color: var(--primary-color);
+    background-color: var(--primary-bg-color);
+    overflow-y: auto; /* ✅ Allows scrolling */
+    height: 100vh; /* ✅ Ensures full height */
+    scrollbar-width: none;
+    animation: fadeInFromTop 1s ease-out;
+  }
+
+
+.about-container::-webkit-scrollbar {
+    display: none; /* ✅ Hides scrollbar in Chrome/Safari */
+  }
+  
+  body, html {
+    overflow: auto; /* ✅ Enables scrolling globally */
+  }
+  
+  .about-container h1 {
+    font-size: 32px;
+    margin-bottom: 50px; /* Increased spacing */
+  }
+  
+  .about-container .subtitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--secondary-color);
+    margin-bottom: 25px; /* Added space below subtitle */
+  }
+  
+  .about-container h2 {
+    font-size: 24px;
+    margin-top: 40px; /* Added spacing above sections */
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+  }
+  
+  .about-container ul {
+    text-align: left;
+    padding-left: 20px;
+  }
+  
+  .about-container ul li {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  
+  .about-container p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  @keyframes fadeInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-20px); /* Moves text up slightly */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .about-container h1 {
+    animation: fadeInFromTop 1s ease-out;
+  }
+  
+  .about-container .subtitle {
+    animation: fadeInFromTop 1s ease-out;
+    animation-delay: 0.3s; /* ✅ Delayed fade-in */
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  
+  .about-container p {
+    animation: fadeInFromTop 1s ease-out;
+    animation-delay: 0.6s; /* ✅ Delayed fade-in */
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  
+  .about-container h2 {
+    animation: fadeInFromTop 1s ease-out;
+    animation-delay: 0.9s; /* ✅ Delayed fade-in */
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  
+  .about-container ul {
+    animation: fadeInFromTop 1s ease-out;
+    animation-delay: 1.2s; /* ✅ Delayed fade-in */
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }

@@ -82,6 +82,8 @@ Chat.propTypes = {
     })
   ).isRequired,
   welcomeVisible: PropTypes.bool.isRequired,
+  urlGroups: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Chat;

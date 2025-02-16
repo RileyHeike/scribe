@@ -85,6 +85,7 @@ const App = () => {
         <div className="sidebar-buttons">
           <button><Link to='/about'>About</Link></button>
           <button><Link to='/faq'>FAQ</Link></button>
+          <button><a href="https://content.scu.edu/" target="_blank">SCU Digital Archives</a></button>
         </div>
       </div>
 

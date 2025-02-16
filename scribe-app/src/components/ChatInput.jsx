@@ -81,6 +81,7 @@ ChatInput.propTypes = {
   onSendMessage: PropTypes.func.isRequired,
   conversationContext: PropTypes.array.isRequired,
   setConversationContext: PropTypes.func.isRequired,
+  setIsLoading: PropTypes.func.isRequired,
 };
 
 export default ChatInput;
