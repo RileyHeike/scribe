@@ -21,7 +21,6 @@ html, body {
   --secondary-color: #981E32;
 }
 
-/* App container - side-by-side layout */
 .app-container {
   display: flex;
   height: 100vh;
@@ -32,7 +31,6 @@ html, body {
   justify-content: center;
 }
 
-/* Chat container now takes up the rest of the screen */
 .chat-container {
   max-width: 90%;
   flex: 1;
@@ -44,8 +42,6 @@ html, body {
   background-color: var(--primary-bg-color);
 }
 
-
-/* Welcome Text */
 .welcome-text {
   font-size: 34px;
   font-weight: 300;
@@ -53,10 +49,8 @@ html, body {
   text-align: center;
   font: 34px 'Courier New', monospace;
   color: var(--secondary-color);
-  /*text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);*/
 }
 
-/* Welcome Message */
 .welcome-message {
   font-size: 14px;
   font-weight: 500;
@@ -69,23 +63,22 @@ html, body {
 }
 
 .chat-window::-webkit-scrollbar {
-  width: 6px; /* Slim scrollbar */
+  width: 6px;
 }
 
 .chat-window::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2); /* Light grey scrollbar */
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
 .chat-window::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.4); /* Darker on hover */
+  background: rgba(0, 0, 0, 0.4); 
 }
 
 .chat-window::-webkit-scrollbar-track {
-  background: transparent; /* Hide track background */
+  background: transparent;
 }
 
-/* Chat window takes up available space */
 .chat-window {
   color: var(--primary-bg-color);
   flex: 1;
@@ -115,7 +108,6 @@ html, body {
   padding-bottom: 20px;
 }
 
-/* Make sure chat bubbles don't overflow */
 .chat-bubble {
   max-width: 80%;
   padding: 15px;
@@ -126,7 +118,7 @@ html, body {
 }
 
 .user-message {
-  background-color: #981E32;  /* Blue for user messages */
+  background-color: #981E32; 
   color: white;
   align-self: flex-end;
   text-align: left;
@@ -151,7 +143,7 @@ html, body {
 
 .chat-messages {
   align-items: flex-start;
-  margin-top: 0; /* ✅ Moves messages to the top */
+  margin-top: 0; 
 }
 
 /* Chat input bar */
@@ -163,7 +155,7 @@ html, body {
   max-width: 600px;
   border-radius: 25px;
   margin: auto;
-  position: relative; /* Enables absolute positioning for child elements */
+  position: relative; 
   z-index: 0;
 
 }
@@ -179,7 +171,7 @@ html, body {
 
 .chat-input button {
   position: absolute;
-  right: 15px; /* Adjust this value to position the button horizontally */
+  right: 15px; 
   top: 50%;
   transform: translateY(-50%);
   background-color: white;
@@ -228,7 +220,6 @@ html, body {
   transform: translateX(0);
 }
 
-/* Sidebar Title */
 .sidebar-title {
   font-size: 18px;
   font-weight: bold;
@@ -237,7 +228,6 @@ html, body {
   text-transform: uppercase;
 }
 
-/* List of Conversations */
 .conversation-list {
   list-style: none;
   padding: 0;
@@ -245,7 +235,6 @@ html, body {
   width: 100%;
 }
 
-/* Individual Conversation Item */
 .conversation-item {
   display: flex;
   align-items: center;
@@ -258,17 +247,14 @@ html, body {
   font-size: 16px;
 }
 
-/* Hover Effect */
 .conversation-item:hover {
   background-color: #3D1F23;
 }
 
-/* Active Conversation (Optional) */
 .conversation-item.active {
   background-color: #007aff;
 }
 
-/* Sidebar Buttons */
 .sidebar-buttons {
   display: flex;
   flex-direction: column;
@@ -301,19 +287,17 @@ html, body {
   width: 100%;
 }
 
-/* New Conversation Button */
 .new-conversation-btn {
   width: 100%;
   padding: 12px 15px;
-  margin-top: 30px; /* Added spacing from the top */
-  margin-bottom: 25px; /* Added spacing below */
+  margin-top: 40px; 
+  margin-bottom: 30px; 
   background-color: var(--secondary-color);
   color: var(--primary-bg-color);
   border: none;
   text-align: center;
   cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
   border-radius: 5px;
   transition: background-color 0.2s ease-in-out;
 }
@@ -322,7 +306,6 @@ html, body {
   background-color: #3D1F23;
 }
 
-/* Info Pages */
 .info-page {
   text-align: center;
   padding: 50px;
@@ -341,7 +324,6 @@ html, body {
   line-height: 1.6;
 }
 
-/* Close Button */
 .close-sidebar {
   background: none;
   border: none;
@@ -354,16 +336,13 @@ html, body {
 }
 
 
-
-/* Responsive Design */
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .history-panel {
-    display: none; /* Hides sidebar */
+    display: none; 
   }
 
   .hamburger-menu {
-    display: block; /* Show hamburger menu */
+    display: block; 
   }
 }
 

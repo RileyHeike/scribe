@@ -27,7 +27,7 @@ const App = () => {
   const handleSendMessage = ({ role, text, urls }) => {
     setUrlGroups([...urlGroups, urls ?? []])
     console.log("urls", urlGroups)
-    if (!text.trim()) return; // Ensure text is valid
+    if (!text.trim()) return; // Don't send empty messages
   
     const newMessage = { role, text };
   
@@ -46,29 +46,32 @@ const App = () => {
       const newTitle = `Conversation ${conversations.length + 1}`;
       const newConversation = { title: newTitle, messages: [newMessage] };
   
-      setConversations([newConversation, ...conversations]); // Add new conversation to the list
-      setActiveConversationIndex(0); // Set this new conversation as the active one
+      // Add the new conversation to the list of conversations
+      setConversations([newConversation, ...conversations]); 
+      setActiveConversationIndex(0); 
     }
   
     // Also update the current conversation to show the most recent message
     setCurrentConversation((prevMessages) => [...prevMessages, newMessage]);
-    setWelcomeVisible(false); // Hide the welcome screen after the first message
+    setWelcomeVisible(false); 
   };
   
+  //Load conversation, set current convo, set active convo index, hide welcome screen, close sidebar, nav to /
   const handleLoadConversation = (messages, index) => {
-    setCurrentConversation(messages); // Set the selected conversation messages
-    setActiveConversationIndex(index); // Set the active conversation index
+    setCurrentConversation(messages); 
+    setActiveConversationIndex(index); 
     setWelcomeVisible(false);
     setSidebarOpen(false);
-    navigate("/"); // Redirect back to the chat page
+    navigate("/"); 
   };
   
+  //Reset active convo, current convo, and welcome screen, nav to /
   const handleNewConversation = () => {
-    setActiveConversationIndex(null); // Reset active conversation
+    setActiveConversationIndex(null); 
     setCurrentConversation([]);
     setWelcomeVisible(true);
     setSidebarOpen(false);
-    navigate("/"); // Ensure user is redirected back to chat page
+    navigate("/"); 
   };
 
   return (

@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 // Create the Chat Context
 const ChatContext = createContext();
 
+// Chat Provider component, provides chat state to the entire app
 export const ChatProvider = ({ children }) => {
   const [currentConversation, setCurrentConversation] = useState([]);
   const [welcomeVisible, setWelcomeVisible] = useState(true);
   const [conversations, setConversations] = useState([]);
 
-    // Debug
+  // Log the updated conversations
   useEffect(() => {
     console.log("Updated Conversations:", conversations);
   }, [conversations]);

@@ -16,16 +16,16 @@
 
   .faq-container h1 {
     font-size: 32px;
-    margin-bottom: 100px; /* Increased spacing */
+    margin-bottom: 100px;
     animation: fadeInFromTop 1s ease-out;
   }
   
   .faq-item {
     text-align: left;
-    margin-bottom: 40px; /* Increased spacing between questions */
+    margin-bottom: 40px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
-    opacity: 0; /* Start hidden */
+    opacity: 0;
     animation: fadeInFromTop 1s ease-out;
     animation-fill-mode: forwards;
   }

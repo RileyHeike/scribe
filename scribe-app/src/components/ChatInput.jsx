@@ -15,10 +15,12 @@ const ChatInput = ({ onSendMessage, conversationContext, setConversationContext,
       return;
     }
   
+    // Send the user message, load into UI
     const userMessage = { role: "user", text: messageText };
-    onSendMessage(userMessage); // Send the user message
+    onSendMessage(userMessage); 
   
     try {
+      //Prepare API request and POST
       const payload = JSON.stringify({ prompt: messageText, context: conversationContext });
       console.log("Payload:", payload);
   
@@ -33,6 +35,7 @@ const ChatInput = ({ onSendMessage, conversationContext, setConversationContext,
       const data = await response.json();
       console.log("Response:", data);
   
+      // Handle the response from the AI model
       if (data.context) {
         let aiText = data.context[data.context.length - 1]?.content + "\n\nHere are some relevant documents and artifacts:\n\n"
         const urls = []
@@ -48,17 +51,22 @@ const ChatInput = ({ onSendMessage, conversationContext, setConversationContext,
           text: aiText || "No response from AI.",
           urls
         };
-        onSendMessage(aiResponse); // Send the AI response
-  
-        setConversationContext(data.context); // Update conversation context
+
+        // Send the AI response
+        onSendMessage(aiResponse); 
+        
+        // Update conversation context
+        setConversationContext(data.context); 
+
       } else {
         console.error("Error:", data.error);
       }
     } catch (error) {
       console.error("Request failed:", error);
     }
-  
-    setMessage(""); // Clear the input after sending
+
+    // Clear the input after sending
+    setMessage(""); 
   };
   
   

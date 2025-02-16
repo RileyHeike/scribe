@@ -23,18 +23,20 @@ CORS(app, supports_credentials=True)
 
 api = Api(app)
 
+## Set up the MongoDB connection and load DB
 client = MongoClient(key_param.MONGO_URI)
 dbName = "archives_data"
 collectionName = "csv_collection"
 collection = client[dbName][collectionName]
 
+## Vector Store Embeddings
 embeddings = OpenAIEmbeddings(openai_api_key=key_param.open_ai_api_key)
-
 vectorStore = MongoDBAtlasVectorSearch(
     embedding=embeddings,
     collection=collection
 )
 
+## Find closest 5 matches from query
 def query_data(query):
     docs = vectorStore.similarity_search(query, k=5)
     as_output1 = docs[0].page_content
@@ -43,6 +45,7 @@ def query_data(query):
     as_output4 = docs[3].page_content
     as_output5 = docs[4].page_content
 
+    ## Provide system context
     messages = [
         SystemMessage(content="You are a Santa Clara University Digital Archives Bot. You will answer questions based on the documents provided that are about the history of Santa Clara told through school newspaper articles. Be sure to include one quote from the document that best applies to the user's question."),
         SystemMessage(content="You will be provided with 5 documents, you do not need to include information from all of them. Use primarily the first document and then revise it with the documents after"),
@@ -54,6 +57,7 @@ def query_data(query):
         HumanMessage(content=query)
     ]
 
+    ## Initiate the LLM
     llm = ChatOpenAI(
         openai_api_key=key_param.open_ai_api_key, 
         temperature=0,
@@ -67,6 +71,7 @@ def query_data(query):
 
 system_context = '''You are a helpful assistant who is being given a document pertaining to Santa Clara Univeristy history. Answer the prompt, but do not reveal where you are getting your info from. If you cannot answer, just say you do not have enough information. Make sure to pay attention to dates both in the document and the prompt to make sure things align.'''
 
+## Define class for API call use
 class ChatHandler(Resource):
     def __init__(self, **kwargs):
         self.context = [{"role": "system",
