@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Chat from "./components/Chat";
@@ -23,43 +23,51 @@ const App = () => {
     
     const newMessage = { role: "user", text };
     const updatedConversation = [...currentConversation, newMessage];
-  
+
     setCurrentConversation(updatedConversation);
     setWelcomeVisible(false);
-  
-    // Update the existing conversation
-    handleUpdateConversation(updatedConversation);
+
+    // Save the ongoing conversation
+    handleSaveOngoingConversation(updatedConversation);
   };
-  
-  const handleUpdateConversation = (updatedConversation) => {
+
+  const handleSaveOngoingConversation = (updatedConversation) => {
+    if (updatedConversation.length === 0) return;
+
     setConversations((prevConversations) => {
       if (prevConversations.length === 0) {
-        // If there are no conversations, create a new one
+        // If no previous conversations exist, start with the first one
         return [{ title: `Conversation 1`, messages: updatedConversation }];
       }
-  
-      // Update the latest conversation instead of adding a new one
+
+      // Find the current conversation in the list and update it
       return prevConversations.map((conv, index) =>
         index === 0 ? { ...conv, messages: updatedConversation } : conv
       );
     });
   };
-  
+
+  const handleNewConversation = () => {
+    if (currentConversation.length > 0) {
+      // Save current conversation before creating a new one
+      setConversations((prevConversations) => [
+        ...prevConversations, // Keep old conversations
+        { title: `Conversation ${prevConversations.length + 1}`, messages: currentConversation }
+      ]);
+    }
+
+    // Clear the chat for a fresh start
+    setCurrentConversation([]);
+    setWelcomeVisible(true);
+    setSidebarOpen(false);
+    navigate("/"); // Redirect user to chat page
+  };
+
   const handleLoadConversation = (messages) => {
     setCurrentConversation(messages);
     setWelcomeVisible(false);
     setSidebarOpen(false);
-    navigate("/"); // Ensure user is redirected back to chat page
-  };
-
-  const handleNewConversation = () => {
-    if (currentConversation.length > 0) {
-      handleUpdateConversation(currentConversation);
-    }
-    setCurrentConversation([]);
-    setWelcomeVisible(true);
-    setSidebarOpen(false);
-    navigate("/"); // Ensure user is redirected back to chat page
+    navigate("/"); // Redirect user to chat page
   };
 
   return (

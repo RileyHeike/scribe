@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { FaSearch } from 'react-icons/fa';
-
 
 const ChatInput = ({ onSendMessage }) => {
   const [text, setText] = useState("");
@@ -22,7 +20,7 @@ const ChatInput = ({ onSendMessage }) => {
         onChange={(e) => setText(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && handleSend()}
       />
-      <button onClick={handleSend}><FaSearch /></button>
+      <button onClick={handleSend}>Send</button>
     </div>
   );
 };
