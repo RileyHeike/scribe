@@ -17,6 +17,19 @@ from langchain.docstore.document import Document
 import key_param
 import nltk
 nltk.download('punkt')  # Downloads the tokenizer
+import pandas as pd
+from pymongo import MongoClient
+from langchain_community.embeddings import OpenAIEmbeddings 
+from langchain_community.vectorstores import MongoDBAtlasVectorSearch  
+from langchain_community.document_loaders import DirectoryLoader  
+from langchain_community.llms import openai 
+from langchain_openai import OpenAI, ChatOpenAI
+from langchain.schema import SystemMessage, HumanMessage, AIMessage
+from langchain.chains import RetrievalQA
+from langchain.docstore.document import Document
+import key_param
+import nltk
+nltk.download('punkt')  # Downloads the tokenizer
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -113,7 +126,7 @@ class ChatHandler(Resource):
     
     @app.after_request
     def add_cors_headers(response):
-        response.headers["Access-Control-Allow-Origin"] = "http://localhost:5173"
+        response.headers["Access-Control-Allow-Origin"] = "http://localhost:5174"
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
         response.headers["Access-Control-Allow-Credentials"] = "true"
