@@ -20,19 +20,31 @@ const App = () => {
 
   const handleSendMessage = (text) => {
     if (!text.trim()) return;
+    
     const newMessage = { role: "user", text };
-    setCurrentConversation([...currentConversation, newMessage]);
+    const updatedConversation = [...currentConversation, newMessage];
+  
+    setCurrentConversation(updatedConversation);
     setWelcomeVisible(false);
+  
+    // Update the existing conversation
+    handleUpdateConversation(updatedConversation);
   };
-
-  const handleSaveConversation = () => {
-    if (currentConversation.length === 0) return;
-    const newTitle = `Conversation ${conversations.length + 1}`;
-    setConversations([{ title: newTitle, messages: currentConversation }, ...conversations]);
-    setCurrentConversation([]);
-    setWelcomeVisible(true);
+  
+  const handleUpdateConversation = (updatedConversation) => {
+    setConversations((prevConversations) => {
+      if (prevConversations.length === 0) {
+        // If there are no conversations, create a new one
+        return [{ title: `Conversation 1`, messages: updatedConversation }];
+      }
+  
+      // Update the latest conversation instead of adding a new one
+      return prevConversations.map((conv, index) =>
+        index === 0 ? { ...conv, messages: updatedConversation } : conv
+      );
+    });
   };
-
+  
   const handleLoadConversation = (messages) => {
     setCurrentConversation(messages);
     setWelcomeVisible(false);
@@ -42,7 +54,7 @@ const App = () => {
 
   const handleNewConversation = () => {
     if (currentConversation.length > 0) {
-      handleSaveConversation();
+      handleUpdateConversation(currentConversation);
     }
     setCurrentConversation([]);
     setWelcomeVisible(true);
@@ -72,7 +84,6 @@ const App = () => {
           <Route path="/" element={<>
             <Chat messages={currentConversation} welcomeVisible={welcomeVisible} />
             <ChatInput onSendMessage={handleSendMessage} />
-            <button className="save-button" onClick={handleSaveConversation}>Save Conversation</button>
           </>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/faq" element={<FAQPage />} />

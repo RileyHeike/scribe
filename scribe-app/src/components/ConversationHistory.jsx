@@ -7,7 +7,7 @@ const ConversationHistory = ({ conversations, onLoadConversation }) => {
       <h2 className="sidebar-title">Conversations</h2>
       <ul className="conversation-list">
         {conversations.length === 0 ? (
-          <p style={{ color: "gray", fontSize: "14px", textAlign: "center" }}>No conversations yet</p>
+          <p style={{ color: "#F6F0E8", fontSize: "14px", textAlign: "center" }}>No conversations yet</p>
         ) : (
           conversations.map((conv, index) => (
             <li 
