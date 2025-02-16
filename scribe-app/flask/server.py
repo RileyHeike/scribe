@@ -36,16 +36,6 @@ vectorStore = MongoDBAtlasVectorSearch(
 )
 
 def query_data(query):
-    # docs = vectorStore.similarity_search(query, K=1)
-    # as_output = docs[0].page_content
-    # print(docs[0])
-
-    # llm = ChatOpenAI(openai_api_key=key_param.open_ai_api_key, temperature=0)
-    # retriever = vectorStore.as_retriever()
-    # qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=retriever)
-    # retriever_output = qa.run(query)
-
-    # return as_output, retriever_output
     docs = vectorStore.similarity_search(query, k=5)
     as_output1 = docs[0].page_content
     as_output2 = docs[1].page_content

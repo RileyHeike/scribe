@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
 import BouncingDotsLoader from "./BouncingDots";
+import { TypeAnimation } from 'react-type-animation';
 
 const Chat = ({ messages, welcomeVisible, urlGroups, isLoading }) => {
   const [fade, setFade] = useState(true);
@@ -17,12 +18,31 @@ const Chat = ({ messages, welcomeVisible, urlGroups, isLoading }) => {
   return (
     <div className="chat-window">
       {welcomeVisible && fade && (
-        <div className="welcome-text">
-          <h1>Welcome to SCRIBE</h1>
-          <div className="welcome-message">
-            <p>A RAG-based AI chatbot built to unearth buried stories and bring SCU digital archives to life.</p>
-          </div>
-        </div>
+        <>
+          <div className="welcome-text">
+            <TypeAnimation
+              sequence={[
+                // Same substring at the start will only be typed out once, initially
+                'Welcome to SCRIBE',
+                1000
+              ]}
+              wrapper="span"
+              speed={75}
+              style={{ fontSize: '2em', display: 'inline-block' }}
+              repeat={0} />
+            <div className="welcome-message">
+              <TypeAnimation
+                sequence={[
+                  // Same substring at the start will only be typed out once, initially
+                  'A RAG-based AI chatbot built to unearth buried stories and bring SCU digital archives to life.',
+                  1000
+                ]}
+                wrapper="span"
+                speed={70}
+                style={{ fontSize: '2em', display: 'inline-block' }}
+                repeat={0} />
+            </div>
+          </div></>
       )}
 
 
