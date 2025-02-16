@@ -8,6 +8,7 @@ import AboutPage from "./components/AboutPage";
 import FAQPage from "./components/FAQPage";
 import { useChat } from "./context/ChatContext"; // Import Chat Context
 
+
 const App = () => {
   const {
     currentConversation, setCurrentConversation,
@@ -18,6 +19,7 @@ const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
+  const [conversationContext, setConversationContext] = useState([]); // Stores all conversations
   const [activeConversationIndex, setActiveConversationIndex] = useState(null); // Tracks which conversation is selected
 
   const handleSendMessage = (text) => {
@@ -92,7 +94,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<>
             <Chat messages={currentConversation} welcomeVisible={welcomeVisible} />
-            <ChatInput onSendMessage={handleSendMessage} />
+            <ChatInput onSendMessage={handleSendMessage} conversationContext={conversationContext} setConversationContext={setConversationContext}/>
           </>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/faq" element={<FAQPage />} />
