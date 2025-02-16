@@ -7,42 +7,46 @@ const ChatInput = ({ onSendMessage, conversationContext, setConversationContext 
   const [message, setMessage] = useState("");
 
   const handleSend = async () => {
-    if (!message.trim()){ 
+    if (!message.trim()) {
       console.log("No message entered");
       return;
     }
-      onSendMessage(message);
-
-      try {
-        const payload = JSON.stringify({prompt: message, context: conversationContext});
-        console.log("Payload:", payload);
-
-        const response = await fetch("http://localhost:5005/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload,
-        });
-
-        const data = await response.json();
-        console.log("Response:", data);
-
-        if (data.context) {
-          // Extract AI response from context
-          const aiResponse = data.context[data.context.length - 1].content;
-          onSendMessage(aiResponse); // Display AI response
   
-          // Update conversation context
-          setConversationContext(data.context);
-        } else {
-          console.error("Error:", data.error);
-        }
-      } catch (error) {
-        console.error("Request failed:", error);
+    const userMessage = { role: "user", text: message };
+    onSendMessage(userMessage); // Send the user message
+  
+    try {
+      const payload = JSON.stringify({ prompt: message, context: conversationContext });
+      console.log("Payload:", payload);
+  
+      const response = await fetch("http://localhost:5005/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      });
+  
+      const data = await response.json();
+      console.log("Response:", data);
+  
+      if (data.context) {
+        const aiResponse = {
+          role: "assistant",  // Ensure the role is set to 'assistant'
+          text: data.context[data.context.length - 1]?.content || "No response from AI.",
+        };
+        onSendMessage(aiResponse); // Send the AI response
+  
+        setConversationContext(data.context); // Update conversation context
+      } else {
+        console.error("Error:", data.error);
       }
-
-      setMessage("");
-    
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  
+    setMessage(""); // Clear the input after sending
   };
+  
+  
 
   return (
     <div className="chat-input">

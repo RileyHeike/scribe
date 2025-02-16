@@ -21,11 +21,15 @@ const Chat = ({ messages, welcomeVisible }) => {
         </div>
       )}
 
-      {messages.map((msg, index) => (
-        <div key={index} className={`chat-bubble ${msg.role}`}>
+{messages.map((msg, index) => (
+        <div
+          key={index}
+          className={`chat-bubble ${msg.role === "assistant" ? "ai-message" : "user-message"}`} // Apply different styles
+        >
           {msg.text}
         </div>
       ))}
+
     </div>
   );
 };
