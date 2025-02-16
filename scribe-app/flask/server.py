@@ -5,6 +5,8 @@ from app import collect_messages
 import pandas as pd
 from pymongo import MongoClient
 from langchain_community.embeddings import OpenAIEmbeddings 
+from langchain.chat_models import ChatOpenAI
+from langchain.schema import SystemMessage, HumanMessage, AIMessage
 from langchain_community.vectorstores import MongoDBAtlasVectorSearch  
 from langchain_community.document_loaders import DirectoryLoader  
 from langchain_community.llms import openai 
@@ -33,39 +35,51 @@ vectorStore = MongoDBAtlasVectorSearch(
     collection=collection
 )
 
+def query_data(query):
+    # docs = vectorStore.similarity_search(query, K=1)
+    # as_output = docs[0].page_content
+    # print(docs[0])
 
-def query_data_chat(query):
-    docs = vectorStore.similarity_search(query, K=1)
-    as_output = docs[0].page_content
-    print(docs[0])
+    # llm = ChatOpenAI(openai_api_key=key_param.open_ai_api_key, temperature=0)
+    # retriever = vectorStore.as_retriever()
+    # qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=retriever)
+    # retriever_output = qa.run(query)
 
-    llm = ChatOpenAI(openai_api_key=key_param.open_ai_api_key, temperature=0)
+    # return as_output, retriever_output
+    docs = vectorStore.similarity_search(query, k=5)
+    as_output1 = docs[0].page_content
+    as_output2 = docs[1].page_content
+    as_output3 = docs[2].page_content
+    as_output4 = docs[3].page_content
+    as_output5 = docs[4].page_content
 
-    retriever = vectorStore.as_retriever()
-
-    qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=retriever)
-
-    retriever_output = qa.run(query)
+    print("="*20)
+    print("DATE : " + str(docs[0].metadata['date']))
+    print("DATE : " + str(docs[0].metadata['id']))
+    print("DATE : " + str(docs[0].metadata['collection']))
+    print("="*20)
 
     messages = [
-        SystemMessage(content="You are a Santa Clara University Digital Archives Bot. You will answer questions based on the documents provided. If the provided document does not sufficiently, then tell the user that there is not an archived document on the topic. Be sure to include one quote from the document that best applies to the user's question."),
-        HumanMessage(content=query),
-        AIMessage(content=as_output)
+        SystemMessage(content="You are a Santa Clara University Digital Archives Bot. You will answer questions based on the documents provided that are about the history of Santa Clara told through school newspaper articles. Be sure to include one quote from the document that best applies to the user's question."),
+        SystemMessage(content="You will be provided with 5 documents, you do not need to include information from all of them. Use primarily the first document and then revise it with the documents after"),
+        SystemMessage(content=as_output1),
+        SystemMessage(content=as_output2),
+        SystemMessage(content=as_output3),
+        SystemMessage(content=as_output4),
+        SystemMessage(content=as_output5),
+        HumanMessage(content=query)
     ]
 
-    return as_output, retriever_output
+    llm = ChatOpenAI(
+        openai_api_key=key_param.open_ai_api_key, 
+        temperature=0,
+        )
+    
+    response = llm.invoke(messages)
+    relevant_docs = [{"id": docs[0].metadata['id'], "collection": docs[0].metadata['collection']}, {"id": docs[1].metadata['id'], "collection": docs[1].metadata['collection']}, {"id": docs[2].metadata['id'], "collection": docs[2].metadata['collection']}]
 
-def query_data(query):
-    docs = vectorStore.similarity_search(query, K=1)
-    as_output = docs[0].page_content
-    print(docs[0])
+    return response.content, relevant_docs
 
-    llm = ChatOpenAI(openai_api_key=key_param.open_ai_api_key, temperature=0)
-    retriever = vectorStore.as_retriever()
-    qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=retriever)
-    retriever_output = qa.run(query)
-
-    return as_output, retriever_output
 
 system_context = '''You are a helpful assistant who is being given a document pertaining to Santa Clara Univeristy history. Answer the prompt, but do not reveal where you are getting your info from. If you cannot answer, just say you do not have enough information. Make sure to pay attention to dates both in the document and the prompt to make sure things align.'''
 
@@ -93,9 +107,9 @@ class ChatHandler(Resource):
             context = self.context
 
         response_context = collect_messages(prompt, context)
-        responseString = query_data_chat(rqs.get('prompt'))[1]
+        responseString, doc_info = query_data(rqs.get('prompt'))
         response_context.append({'role': 'assistant', 'content': f'{responseString}'})
-        response = jsonify({'context': response_context})
+        response = jsonify({'context': response_context, 'docs': doc_info})
 
         # Ensure CORS headers are set
         response.headers.add("Access-Control-Allow-Origin", "*")

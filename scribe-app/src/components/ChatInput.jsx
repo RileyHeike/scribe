@@ -29,9 +29,19 @@ const ChatInput = ({ onSendMessage, conversationContext, setConversationContext 
       console.log("Response:", data);
   
       if (data.context) {
+        let aiText = data.context[data.context.length - 1]?.content + "\n\nHere are some relevant documents and artifacts:\n\n"
+        const urls = []
+        for (let i = 0; i < 3; i++) {
+          if (data.docs[i]) {
+            let doc = data.docs[i]
+            let url = `https://content.scu.edu/digital/collection/${doc.collection}/id/${doc.id}/rec/1`
+            urls.push(<a href={url} target="_blank" key={i} rel="noopener noreferrer">{url}</a>);
+          }
+        }
         const aiResponse = {
           role: "assistant",  // Ensure the role is set to 'assistant'
-          text: data.context[data.context.length - 1]?.content || "No response from AI.",
+          text: aiText || "No response from AI.",
+          urls
         };
         onSendMessage(aiResponse); // Send the AI response
   

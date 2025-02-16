@@ -17,12 +17,15 @@ const App = () => {
   } = useChat();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [urlGroups, setUrlGroups] = useState([]);
   const navigate = useNavigate();
 
   const [conversationContext, setConversationContext] = useState([]); // Stores all conversations
   const [activeConversationIndex, setActiveConversationIndex] = useState(null); // Tracks which conversation is selected
 
-  const handleSendMessage = ({ role, text }) => {
+  const handleSendMessage = ({ role, text, urls }) => {
+    setUrlGroups([...urlGroups, urls ?? []])
+    console.log("urls", urlGroups)
     if (!text.trim()) return; // Ensure text is valid
   
     const newMessage = { role, text };
@@ -87,7 +90,7 @@ const App = () => {
       <div className="chat-container">
         <Routes>
           <Route path="/" element={<>
-            <Chat messages={currentConversation} welcomeVisible={welcomeVisible} />
+            <Chat messages={currentConversation} welcomeVisible={welcomeVisible} urlGroups={urlGroups} />
             <ChatInput onSendMessage={handleSendMessage} conversationContext={conversationContext} setConversationContext={setConversationContext}/>
           </>} />
           <Route path="/about" element={<AboutPage />} />
