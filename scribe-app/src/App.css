@@ -59,6 +59,7 @@ html, body {
   margin-bottom: 20px;
   text-align: center;
   color: var(--primary-color);
+  color: var(--primary-color);
   text-shadow: none;
 
 }
@@ -81,7 +82,19 @@ html, body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px 40px;
+  width: 75%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 40px;
   border: none;
+  margin-top: 20px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 20px;
   margin-top: 20px;
 }
 
@@ -95,6 +108,8 @@ html, body {
 /* Make sure chat bubbles don't overflow */
 .chat-bubble {
   max-width: 80%;
+  padding: 15px;
+  margin: 10px 0;
   padding: 15px;
   margin: 10px 0;
   border-radius: 10px;
