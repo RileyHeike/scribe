@@ -27,7 +27,6 @@ html, body {
   height: 100vh;
   width: 100vw;
   background-color: var(--primary-bg-color);
-  color: white;
   overflow: hidden;
 }
 
@@ -59,7 +58,7 @@ html, body {
   font-weight: 500;
   margin-bottom: 20px;
   text-align: center;
-  color: grey;
+  color: var(--primary-color);
   text-shadow: none;
 
 }
@@ -71,16 +70,26 @@ html, body {
   flex-direction: column;
   justify-content: flex-start;
   overflow-y: auto;
-  width: 100%;
-  padding: 200px;
+  width: 75%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 40px;
   border: none;
+  margin-top: 20px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 20px;
 }
 
 /* Make sure chat bubbles don't overflow */
 .chat-bubble {
   max-width: 80%;
-  padding: 10px;
-  margin: 5px 0;
+  padding: 15px;
+  margin: 10px 0;
   border-radius: 10px;
 }
 
@@ -96,6 +105,12 @@ html, body {
   color: #2C1518;
   align-self: flex-start;
   text-align: left;
+}
+
+
+.chat-messages {
+  align-items: flex-start;
+  margin-top: 0; /* ✅ Moves messages to the top */
 }
 
 /* Chat input bar */
@@ -135,22 +150,6 @@ html, body {
   padding: 10px;
 }
 
-
-
-
-/* Save button */
-.save-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-
-
 .hamburger-menu {
   position: fixed;
   top: 20px;
@@ -166,8 +165,6 @@ html, body {
 .sidebar-overlay.show + .hamburger-menu {
   display: none;
 }
-
-
 
 .sidebar-overlay {
   position: fixed;
